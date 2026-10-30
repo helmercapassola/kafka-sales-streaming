@@ -1,0 +1,136 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0B1020"/>
+      <stop offset="0.5" stop-color="#101B31"/>
+      <stop offset="1" stop-color="#09131C"/>
+    </linearGradient>
+    <linearGradient id="primary" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7C5CFF"/>
+      <stop offset="1" stop-color="#3AC6FF"/>
+    </linearGradient>
+    <linearGradient id="secondary" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#34D399"/>
+      <stop offset="1" stop-color="#10B981"/>
+    </linearGradient>
+    <linearGradient id="data" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FBBF24"/>
+      <stop offset="1" stop-color="#F97316"/>
+    </linearGradient>
+    <linearGradient id="darkCard" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#101B31"/>
+      <stop offset="1" stop-color="#0C152B"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.32" flood-color="#020817"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+
+  <g opacity="0.18">
+    <circle cx="100" cy="120" r="180" fill="#4F46E5"/>
+    <circle cx="1450" cy="760" r="220" fill="#10B981"/>
+    <circle cx="1260" cy="120" r="150" fill="#38BDF8"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="60" y="40" width="1480" height="820" rx="32" fill="#0A1224" stroke="rgba(148,163,184,0.25)"/>
+  </g>
+
+  <text x="800" y="95" text-anchor="middle" font-size="38" font-weight="700" fill="#E5F3FF" font-family="Segoe UI, Arial, sans-serif">Real-Time Sales Streaming Pipeline</text>
+  <text x="800" y="130" text-anchor="middle" font-size="18" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif">Arquitetura do fluxo de eventos em tempo real</text>
+
+  <g>
+    <rect x="110" y="200" width="230" height="150" rx="24" fill="url(#darkCard)" stroke="#4F46E5"/>
+    <circle cx="160" cy="260" r="28" fill="#7C5CFF" opacity="0.2"/>
+    <path d="M160 246V274M146 260H174" stroke="#7C5CFF" stroke-width="5" stroke-linecap="round"/>
+    <text x="225" y="245" text-anchor="middle" font-size="24" font-weight="700" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif">Sales</text>
+    <text x="225" y="275" text-anchor="middle" font-size="24" font-weight="700" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif">Simulator</text>
+    <rect x="150" y="300" width="150" height="24" rx="12" fill="#1F2A44"/>
+    <text x="225" y="317" text-anchor="middle" font-size="11" font-weight="600" fill="#A5B4FC" font-family="Segoe UI, Arial, sans-serif">eventos JSON</text>
+  </g>
+
+  <g>
+    <rect x="420" y="200" width="230" height="150" rx="24" fill="url(#darkCard)" stroke="#3AC6FF"/>
+    <rect x="465" y="235" width="140" height="70" rx="18" fill="url(#primary)" opacity="0.2"/>
+    <path d="M495 285C515 250 540 250 560 285" stroke="#3AC6FF" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="520" cy="270" r="9" fill="#3AC6FF"/>
+    <circle cx="555" cy="270" r="9" fill="#7C5CFF"/>
+    <text x="535" y="330" text-anchor="middle" font-size="24" font-weight="700" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif">Producer</text>
+    <text x="535" y="355" text-anchor="middle" font-size="14" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif">Python</text>
+  </g>
+
+  <g>
+    <rect x="760" y="155" width="320" height="250" rx="28" fill="url(#darkCard)" stroke="#10B981"/>
+    <text x="920" y="200" text-anchor="middle" font-size="26" font-weight="700" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif">Apache Kafka</text>
+    <rect x="790" y="225" width="260" height="105" rx="18" fill="#0E1B2E" stroke="#1EE0A4"/>
+    <text x="920" y="250" text-anchor="middle" font-size="16" fill="#A7F3D0" font-family="Segoe UI, Arial, sans-serif">Topic: sales</text>
+    <g>
+      <rect x="810" y="270" width="64" height="38" rx="10" fill="#13213A"/>
+      <rect x="892" y="270" width="64" height="38" rx="10" fill="#13213A"/>
+      <rect x="974" y="270" width="64" height="38" rx="10" fill="#13213A"/>
+      <text x="842" y="294" text-anchor="middle" font-size="12" fill="#A5B4FC" font-family="Segoe UI, Arial, sans-serif">P1</text>
+      <text x="924" y="294" text-anchor="middle" font-size="12" fill="#A5B4FC" font-family="Segoe UI, Arial, sans-serif">P2</text>
+      <text x="1006" y="294" text-anchor="middle" font-size="12" fill="#A5B4FC" font-family="Segoe UI, Arial, sans-serif">P3</text>
+    </g>
+    <text x="920" y="380" text-anchor="middle" font-size="15" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif">3 partitions • replication factor 1</text>
+  </g>
+
+  <g>
+    <rect x="1160" y="200" width="250" height="150" rx="24" fill="url(#darkCard)" stroke="#F59E0B"/>
+    <circle cx="1225" cy="270" r="34" fill="#FBBF24" opacity="0.18"/>
+    <path d="M1210 285L1225 255L1240 285H1225V310" stroke="#FBBF24" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1295" y="255" text-anchor="middle" font-size="24" font-weight="700" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif">Consumer</text>
+    <text x="1295" y="282" text-anchor="middle" font-size="15" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif">validação +</text>
+    <text x="1295" y="304" text-anchor="middle" font-size="15" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif">processamento</text>
+  </g>
+
+  <g>
+    <rect x="610" y="520" width="340" height="170" rx="28" fill="url(#darkCard)" stroke="#34D399"/>
+    <path d="M690 585L710 560L740 620L770 570L800 620L840 558" stroke="#34D399" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="690" cy="585" r="6" fill="#34D399"/>
+    <circle cx="710" cy="560" r="6" fill="#34D399"/>
+    <circle cx="740" cy="620" r="6" fill="#34D399"/>
+    <circle cx="770" cy="570" r="6" fill="#34D399"/>
+    <circle cx="800" cy="620" r="6" fill="#34D399"/>
+    <circle cx="840" cy="558" r="6" fill="#34D399"/>
+    <text x="780" y="670" text-anchor="middle" font-size="22" font-weight="700" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif">SQL Analytics</text>
+  </g>
+
+  <g>
+    <rect x="1040" y="520" width="330" height="170" rx="28" fill="url(#darkCard)" stroke="#7C5CFF"/>
+    <rect x="1090" y="565" width="90" height="70" rx="16" fill="#181F35"/>
+    <path d="M1110 610H1168" stroke="#7C5CFF" stroke-width="8" stroke-linecap="round"/>
+    <path d="M1130 590V610M1120 600H1140" stroke="#7C5CFF" stroke-width="5" stroke-linecap="round"/>
+    <rect x="1205" y="575" width="120" height="16" rx="8" fill="#24314D"/>
+    <rect x="1205" y="605" width="100" height="16" rx="8" fill="#24314D"/>
+    <rect x="1205" y="635" width="80" height="16" rx="8" fill="#24314D"/>
+    <text x="1205" y="548" font-size="22" font-weight="700" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif">PostgreSQL</text>
+    <text x="1205" y="660" font-size="14" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif">dados processados</text>
+  </g>
+
+  <g>
+    <path d="M340 275H420" stroke="#4F46E5" stroke-width="5" stroke-linecap="round"/>
+    <path d="M650 275H760" stroke="#3AC6FF" stroke-width="5" stroke-linecap="round"/>
+    <path d="M1080 275H1160" stroke="#FBBF24" stroke-width="5" stroke-linecap="round"/>
+    <path d="M920 405V470H780V520" stroke="#10B981" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M920 405V470H1210V520" stroke="#10B981" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M920 405V470H920V520" stroke="#10B981" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M930 690H960V760H760V810" stroke="#7C5CFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M930 690H960V760H1200V810" stroke="#7C5CFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g>
+    <rect x="955" y="725" width="250" height="96" rx="20" fill="#111C2F" stroke="#38BDF8"/>
+    <text x="1080" y="770" text-anchor="middle" font-size="22" font-weight="700" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif">Kafka UI</text>
+    <text x="1080" y="796" text-anchor="middle" font-size="13" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif">monitoramento + observabilidade</text>
+  </g>
+
+  <g>
+    <circle cx="150" cy="780" r="12" fill="#10B981"/>
+    <circle cx="240" cy="780" r="12" fill="#3AC6FF"/>
+    <circle cx="330" cy="780" r="12" fill="#FBBF24"/>
+    <text x="360" y="787" font-size="16" fill="#A5B4FC" font-family="Segoe UI, Arial, sans-serif">Dados em tempo real</text>
+  </g>
+</svg>
