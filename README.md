@@ -8,7 +8,6 @@
 
 </div>
 
-> Data Engineering Portfolio Project
 
 Uma solução de streaming de eventos em tempo real para simular, processar e armazenar vendas online através de Kafka, Python e PostgreSQL.
 
@@ -26,6 +25,17 @@ O objetivo principal é praticar os conceitos fundamentais de engenharia de dado
 - 🗄️ Armazenamento em PostgreSQL
 - 📊 Prática com análise e monitorização de dados
 
+<div align="center">
+
+| Mensagem | Processo | Resultado |
+| --- | --- | --- |
+| Evento de venda gerado | Producer publica em Kafka | Mensagem disponível para consumo |
+| Kafka distribui o evento | Partitions processam em paralelo | Alta escalabilidade |
+| Consumo e validação | Consumer lê e limpa os dados | Dados prontos para persistência |
+| Persistência | PostgreSQL recebe as vendas | Base analítica para consultas |
+
+</div>
+
 ## Objetivos do projecto
 
 - Desenvolver um sistema de processamento de eventos em tempo real.
@@ -42,7 +52,9 @@ O objetivo principal é praticar os conceitos fundamentais de engenharia de dado
 
 A imagem abaixo representa o fluxo completo dos dados, desde a geração dos eventos até à análise final.
 
-![Arquitetura da solução](./assets/architecture.svg)
+<div align="center">
+  <img src="./assets/architecture.svg" alt="Arquitetura da solução" width="100%" style="max-width: 1150px; display: block; margin: 0 auto; border-radius: 18px; box-shadow: 0 12px 30px rgba(15, 23, 42, 0.35);" />
+</div>
 
 ### Fluxo da solução
 
@@ -258,8 +270,7 @@ Outras melhorias possíveis incluem:
 ---
 
 Projecto: Real-Time Sales Streaming Pipeline  
-Área: Data Engineering  
-Tipo: Portfolio Project  
+Área: Data Engineering    
 Estado: Em desenvolvimento
 
 Desenvolvido como projecto prático de aprendizagem e demonstração de competências em Engenharia de Dados.
