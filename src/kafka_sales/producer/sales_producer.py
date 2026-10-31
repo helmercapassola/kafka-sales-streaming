@@ -3,12 +3,9 @@
 
 import json
 import logging
-
-# datetime: permite obter a data e hora da venda.
-# timezone: permite trabalhar com datas em UTC.
+import random
+import time
 from datetime import datetime, timezone
-
-# uuid4: gera um identificador único para cada venda.
 from uuid import uuid4
 
 # Producer: cliente responsável por enviar mensagens ao Kafka.
@@ -22,7 +19,6 @@ from kafka_sales.common.config import (
 
 
 # CONFIGURAÇÃO DOS LOGS
-
 # Define como as mensagens de execução serão apresentadas.
 logging.basicConfig(
     level=logging.INFO,
@@ -32,6 +28,20 @@ logging.basicConfig(
 # Cria um logger para acompanhar a execução do Producer.
 logger = logging.getLogger(__name__)
 
+# Produtos disponíveis e respectivos preços unitários.
+PRODUCTS = {
+    "Laptop": 850.00,
+    "Smartphone": 400.00,
+    "Tablet": 300.00,
+    "Headphones": 100.00,
+    "Smartwatch": 200.00,
+    "Camera": 500.00,
+    "Monitor": 250.00,
+}
+
+# Metodos de pagamento disponíveis.
+PAYMENT_METHODS = ["card", "cash", "transfer"]
+
 
 # CALLBACK DE CONFIRMAÇÃO DA ENTREGA
 
@@ -40,7 +50,8 @@ def delivery_report(err, message):
     Esta função é chamada quando o Kafka informa
     o resultado da tentativa de publicação da mensagem.
     """
-
+    
+   
     # Se existir um erro, significa que a mensagem
     # não foi entregue correctamente.
     if err is not None:
@@ -64,42 +75,26 @@ def create_sale_event():
     Simula uma venda e devolve os seus dados
     num dicionário Python.
     """
-
-    # Quantidade de produtos vendidos.
-    quantity = 2
-
-    # Preço unitário do produto.
-    unit_price = 850.00
-
+    # Seleciona um produto aleatório da lista de produtos disponíveis.
+    product = random.choice(list(PRODUCTS.keys()))
+    quantity = random.randint(1, 5)  # Quantidade aleatória entre 1 e 5.
+    unit_price = PRODUCTS[product]  # Preço unitário do produto selecionado.
+    
     # Calcula o valor total da venda.
     total_amount = round(quantity * unit_price, 2)
 
-    # Estrutura dos dados da venda.
-    sale_event = {
-
-        # Identificador único da venda.
-        "sale_id": str(uuid4()),
-
-        # Nome do produto.
-        "product": "Laptop",
-
-        # Quantidade vendida.
-        "quantity": quantity,
-
-        # Preço de uma unidade.
-        "unit_price": unit_price,
-
-        # Valor total da venda.
-        "total_amount": total_amount,
-
-        # Método de pagamento utilizado.
-        "payment_method": "card",
-
-        # Data e hora da venda em UTC.
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+  
+    # Constrói o evento de que sera enviado para o Kafka.
+   
+    return {
+        "sale_id": str(uuid4()),  # Identificador único da venda.
+        "product": product,  # Nome do produto vendido.
+        "quantity": quantity,  # Quantidade vendida.
+        "unit_price": unit_price,  # Preço unitário do produto.
+        "total_amount": total_amount,  # Valor total da venda.
+        "payment_method": random.choice(PAYMENT_METHODS),  # Método de pagamento aleatório.
+        "timestamp": datetime.now(timezone.utc).isoformat(),  # Data e hora da venda em UTC.
     }
-
-    return sale_event
 
 
 #  PRINCIPAL DO PRODUCER
@@ -111,47 +106,38 @@ def main():
     producer = Producer({
 
         "bootstrap.servers": KAFKA_BOOTSTRAP_SERVERS,
-
         # Identifica o nosso Producer no Kafka.
         "client.id": "sales-producer",
     })
+    
+    logger.info("Iniciando o Producer e gerar vendas...")
 
-    # Geramos um novo evento de venda.
-    sale_event = create_sale_event()
+    try:
+        # Continua a gerar e publicar vendar em quanto o porgrama estiver em execução.
+        while True:
+            sale_event = create_sale_event()  # Gera um evento de venda.
+            
+            # Envia o evento para o topic sales
+            producer.produce(
+                topic=KAFKA_TOPIC_SALES,
+                key=sale_event["sale_id"],  # Chave da mensagem (ID da venda).
+                value=json.dumps(sale_event),  # Valor da mensagem (evento de venda em JSON).
+                callback=delivery_report,  # Função de callback para confirmação de entrega.
+            )
+            
+            # processa o callback de entrega das mensagens.
+            producer.poll(0)
+            
+            # Aguarda dois segundos antes de gerar a próxima venda.
+            time.sleep(2)
+            
+    except KeyboardInterrupt:
+        logger.info("Interrupção do programa pelo utilizador.")
+    finally:
+        logger.info("Fechando o Producer...")
+        producer.flush()  # Aguarda que todas as mensagens pendentes sejam processadas.
+        
 
-    # Convertemos o dicionário Python para uma string JSON.
-    # O Kafka recebe os dados serializados.
-    sale_json = json.dumps(sale_event)
-
-    # Publicamos o evento no topic sales.
-    producer.produce(
-
-        # Topic onde a mensagem será armazenada.
-        topic=KAFKA_TOPIC_SALES,
-
-        # Chave da mensagem.
-        # O Kafka utiliza esta chave para determinar
-        # a partition de destino.
-        key=sale_event["sale_id"],
-
-        # Conteúdo da mensagem em JSON.
-        value=sale_json,
-
-        # Função que será chamada para confirmar a entrega.
-        callback=delivery_report,
-    )
-
-    # Aguarda que as mensagens pendentes sejam processadas
-    # e que os callbacks de entrega sejam executados.
-    producer.flush()
-
-    logger.info("Processamento do Producer concluído.")
-
-
-# PONTO DE ENTRADA DA APLICAÇÃO
-
-# Esta condição garante que a função main()
-# só é executada quando este ficheiro é chamado directamente.
 
 if __name__ == "__main__":
     main()

@@ -9,6 +9,9 @@ from kafka_sales.common.config import (
     KAFKA_TOPIC_SALES,
 )
 
+from kafka_sales.common.validators import validate_sale_event
+
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(message)s",
@@ -27,7 +30,7 @@ def main():
         # Permite ler mensagens antigas quando o grupo ainda não tem offset.
         "auto.offset.reset": "earliest",
 
-        # Só confirma a leitura depois de processarmos a mensagem.
+        # O offset só é confirmado manualmente depois do processamento.
         "enable.auto.commit": False,
     })
 
@@ -49,17 +52,44 @@ def main():
                 logger.error("Erro ao receber mensagem: %s", message.error())
                 continue
 
-            # Converte os bytes recebidos para texto e depois para dicionário.
-            sale = json.loads(message.value().decode("utf-8"))
+            try:
+                # Converte a mensagem recebida para um dicionário Python.
+                sale = json.loads(message.value().decode("utf-8"))
 
+            except (json.JSONDecodeError, UnicodeDecodeError) as error:
+                logger.error(
+                    "Mensagem rejeitada: conteúdo JSON inválido. Erro: %s",
+                    error,
+                )
+
+                # Confirma a mensagem inválida para não a processar repetidamente.
+                consumer.commit(message=message, asynchronous=False)
+                continue
+
+            # Valida os campos e os valores do evento de venda.
+            is_valid, error_message = validate_sale_event(sale)
+
+            if not is_valid:
+                logger.warning(
+                    "Venda rejeitada | Motivo: %s | Partition: %s | Offset: %s",
+                    error_message,
+                    message.partition(),
+                    message.offset(),
+                )
+
+                # Por enquanto, descartamos eventos inválidos após os registar.
+                consumer.commit(message=message, asynchronous=False)
+                continue
+
+            # Regista a venda depois de confirmar que os dados são válidos.
             logger.info(
-                "Venda recebida | ID: %s | Produto: %s | Total: %.2f",
+                "Venda validada | ID: %s | Produto: %s | Total: %.2f",
                 sale["sale_id"],
                 sale["product"],
                 sale["total_amount"],
             )
 
-            # Confirma a leitura apenas depois do processamento bem-sucedido.
+            # Confirma a leitura depois de concluir o processamento.
             consumer.commit(message=message, asynchronous=False)
 
     except KeyboardInterrupt:
