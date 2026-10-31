@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+src/kafka_sales/__init__.py
+src/kafka_sales/common/__init__.py
+src/kafka_sales/common/config.py
+src/kafka_sales/consumer/__init__.py
+src/kafka_sales/producer/__init__.py
+src/kafka_sales_streaming.egg-info/PKG-INFO
+src/kafka_sales_streaming.egg-info/SOURCES.txt
+src/kafka_sales_streaming.egg-info/dependency_links.txt
+src/kafka_sales_streaming.egg-info/requires.txt
+src/kafka_sales_streaming.egg-info/top_level.txt

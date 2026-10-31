@@ -8,64 +8,76 @@
 
 </div>
 
+A real-time streaming solution to simulate, process, and store online sales through Kafka, Python, and PostgreSQL.
 
-Uma solução de streaming de eventos em tempo real para simular, processar e armazenar vendas online através de Kafka, Python e PostgreSQL.
+## Overview
 
-## Visão geral
+This project demonstrates an event-driven architecture in which sales events are generated in Python, published to a Kafka topic, validated and processed by a consumer, and stored in a relational database for later analysis.
 
-Este projecto demonstra uma arquitetura event-driven em que os eventos de venda são gerados em Python, publicados num topic do Kafka, validados e processados por um consumidor e armazenados numa base de dados relacional para análise posterior.
+The main goal is to practice key data engineering and streaming concepts: event production, topic distribution, parallel processing, persistence, and observability.
 
-O objetivo principal é praticar os conceitos fundamentais de engenharia de dados e streaming: produção de eventos, distribuição em tópicos, processamento paralelo, persistência e observabilidade.
+### Project highlights
 
-### Highlights do projecto
-
-- 🔁 Pipeline de dados em tempo real
-- 🧠 Simulação de eventos de vendas em Python
-- ⚡ Publicação e consumo com Kafka
-- 🗄️ Armazenamento em PostgreSQL
-- 📊 Prática com análise e monitorização de dados
+- 🔁 Real-time data pipeline
+- 🧠 Sales event simulation in Python
+- ⚡ Event publication and consumption with Kafka
+- 🗄️ Storage in PostgreSQL
+- 📊 Practical experience with data analysis and monitoring
 
 <div align="center">
 
-| Mensagem | Processo | Resultado |
+| Message | Process | Result |
 | --- | --- | --- |
-| Evento de venda gerado | Producer publica em Kafka | Mensagem disponível para consumo |
-| Kafka distribui o evento | Partitions processam em paralelo | Alta escalabilidade |
-| Consumo e validação | Consumer lê e limpa os dados | Dados prontos para persistência |
-| Persistência | PostgreSQL recebe as vendas | Base analítica para consultas |
+| Sales event generated | Producer publishes to Kafka | Message becomes available for consumption |
+| Kafka distributes the event | Partitions process in parallel | High scalability |
+| Consumption and validation | Consumer reads and cleans the data | Data ready for persistence |
+| Persistence | PostgreSQL receives the sales data | Analytical base for queries |
 
 </div>
-
-## Objetivos do projecto
-
-- Desenvolver um sistema de processamento de eventos em tempo real.
-- Implementar producers e consumers em Python.
-- Compreender a arquitetura e o funcionamento do Apache Kafka.
-- Trabalhar com topics e partitions.
-- Integrar Kafka com PostgreSQL.
-- Validar e tratar erros nos eventos recebidos.
-- Utilizar Docker para orquestrar a infraestrutura local.
-- Realizar consultas SQL para análise dos dados de vendas.
-- Documentar e versionar o projecto com Git e GitHub.
-
-## 🏗️ Arquitectura da solução
-
-A imagem abaixo representa o fluxo completo dos dados, desde a geração dos eventos até à análise final.
 
 <div align="center">
-  <img src="./assets/architecture.svg" alt="Arquitetura da solução" width="100%" style="max-width: 1150px; display: block; margin: 0 auto; border-radius: 18px; box-shadow: 0 12px 30px rgba(15, 23, 42, 0.35);" />
+
+<table>
+  <tr>
+    <td><strong>Type</strong><br>Portfolio Project</td>
+    <td><strong>Area</strong><br>Data Engineering</td>
+    <td><strong>Architecture</strong><br>Event-driven</td>
+    <td><strong>Status</strong><br>In development</td>
+  </tr>
+</table>
+
 </div>
 
-### Fluxo da solução
+## Objectives
 
-- Simulação de vendas em Python.
-- Publicação de eventos no topic `sales`.
-- Distribuição via partitions do Kafka.
-- Consumo, validação e processamento dos dados.
-- Persistência em PostgreSQL.
-- Monitorização com Kafka UI e análise SQL.
+- Build a real-time event processing system.
+- Implement producers and consumers in Python.
+- Understand Kafka architecture and operation.
+- Work with topics and partitions.
+- Integrate Kafka with PostgreSQL.
+- Validate and handle errors in incoming events.
+- Use Docker to orchestrate the local infrastructure.
+- Run SQL queries to analyze sales data.
+- Document and version the project with Git and GitHub.
 
-## ⚙️ Stack tecnológica
+## 🏗️ Solution architecture
+
+The image below represents the complete data flow, from event generation to final analysis.
+
+<div align="center">
+  <img src="./assets/architecture.svg" alt="Solution architecture" width="100%" style="max-width: 1150px; display: block; margin: 0 auto; border-radius: 18px; box-shadow: 0 12px 30px rgba(15, 23, 42, 0.35);" />
+</div>
+
+### Solution flow
+
+- Sales simulation in Python.
+- Event publication to the `sales` topic.
+- Distribution across Kafka partitions.
+- Consumption, validation, and data processing.
+- Persistence in PostgreSQL.
+- Monitoring with Kafka UI and SQL analysis.
+
+## ⚙️ Tech stack
 
 <div align="left">
 
@@ -78,55 +90,55 @@ A imagem abaixo representa o fluxo completo dos dados, desde a geração dos eve
 
 </div>
 
-| Tecnologia | Responsabilidade |
+| Technology | Responsibility |
 | --- | --- |
-| Python | Produção e consumo de eventos |
-| Apache Kafka | Streaming e distribuição de eventos |
-| Kafka UI | Monitorização e observabilidade do cluster |
-| PostgreSQL | Armazenamento dos dados processados |
-| Docker | Execução dos serviços locais |
-| Docker Compose | Orquestração dos containers |
-| Git / GitHub | Versionamento e documentação |
-| DBeaver | Consulta e análise dos dados |
+| Python | Event production and consumption |
+| Apache Kafka | Event streaming and distribution |
+| Kafka UI | Cluster monitoring and observability |
+| PostgreSQL | Storage of processed data |
+| Docker | Local service execution |
+| Docker Compose | Container orchestration |
+| Git / GitHub | Version control and documentation |
+| DBeaver | Query and data analysis |
 
-Tecnologias previstas para evolução:
+Technologies planned for future evolution:
 
-- Apache Airflow — orquestração de workflows e pipelines batch.
+- Apache Airflow — orchestration of workflows and batch pipelines.
 
-## 🐳 Infraestrutura Docker
+## 🐳 Docker infrastructure
 
-A infraestrutura é gerida com Docker Compose e inclui os principais serviços do pipeline.
+The infrastructure is managed with Docker Compose and includes the main services of the pipeline.
 
-| Serviço | Container | Porta |
+| Service | Container | Port |
 | --- | --- | --- |
 | Apache Kafka | `kafka-sales` | `9092` |
 | PostgreSQL | `postgres-sales` | `5432` |
 | Kafka UI | `kafka-ui` | `8080` |
 
-O ambiente utiliza Kafka em modo KRaft, dispensando a necessidade de ZooKeeper.
+The environment uses Kafka in KRaft mode, eliminating the need for ZooKeeper.
 
-### Aceder aos serviços
+### Access services
 
 - Kafka: `localhost:9092`
 - PostgreSQL: `localhost:5432`
 - Kafka UI: `http://localhost:8080`
 
-## 📨 Configuração do Kafka
+## 📨 Kafka configuration
 
-O primeiro topic do projecto será:
+The first topic of the project will be:
 
-| Propriedade | Configuração |
+| Property | Configuration |
 | --- | --- |
 | Topic | `sales` |
 | Partitions | `3` |
 | Replication Factor | `1` |
 | Cleanup Policy | `delete` |
 
-As três partitions permitem explorar a distribuição dos eventos e o paralelismo do consumo. Como o ambiente utiliza apenas um broker, o replication factor será 1.
+The three partitions allow the distribution of events and enable consumer parallelism. Since the environment uses only one broker, the replication factor is 1.
 
-## 🧾 Exemplo de evento de venda
+## 🧾 Example sales event
 
-Os eventos são transmitidos em formato JSON.
+Events are transmitted in JSON format.
 
 ```json
 {
@@ -138,9 +150,9 @@ Os eventos são transmitidos em formato JSON.
 }
 ```
 
-Cada evento representa uma venda realizada numa loja online. O producer é responsável por gerar e publicar os dados no topic `sales`, enquanto o consumer recebe, valida e processa as mensagens antes de as persistir no PostgreSQL.
+Each event represents a sale made in an online store. The producer is responsible for generating and publishing the data to the `sales` topic, while the consumer reads, validates, and processes the messages before persisting them in PostgreSQL.
 
-## 📁 Estrutura do projecto
+## 📁 Project structure
 
 ```text
 real-time-sales-streaming/
@@ -164,25 +176,25 @@ real-time-sales-streaming/
 └── tests/
 ```
 
-A estrutura pode sofrer ajustes conforme a implementação evolui.
+The structure may change as implementation evolves.
 
-## 🗺️ Plano de desenvolvimento
+## 🗺️ Development plan
 
-| Etapa | Actividade | Estado |
+| Stage | Activity | Status |
 | --- | --- | --- |
-| 1 | Estrutura do projecto | Concluída |
-| 2 | Configuração da infraestrutura Docker | Concluída |
-| 3 | Criação do topic `sales` | Próxima etapa |
-| 4 | Desenvolvimento do producer em Python | Pendente |
-| 5 | Desenvolvimento do consumer em Python | Pendente |
-| 6 | Integração com PostgreSQL | Pendente |
-| 7 | Validação e tratamento de erros | Pendente |
-| 8 | Testes e monitorização | Pendente |
-| 9 | Documentação e publicação no GitHub | Pendente |
+| 1 | Project structure | Completed |
+| 2 | Docker infrastructure setup | Completed |
+| 3 | Create the `sales` topic | Next step |
+| 4 | Python producer development | Pending |
+| 5 | Python consumer development | Pending |
+| 6 | PostgreSQL integration | Pending |
+| 7 | Validation and error handling | Pending |
+| 8 | Testing and monitoring | Pending |
+| 9 | Documentation and GitHub publishing | Pending |
 
-## ▶️ Como executar o projecto
+## ▶️ How to run the project
 
-### Pré-requisitos
+### Prerequisites
 
 - Windows
 - Python 3
@@ -190,87 +202,97 @@ A estrutura pode sofrer ajustes conforme a implementação evolui.
 - Docker Compose
 - Git
 
-### Iniciar a infraestrutura
+### Start the infrastructure
 
-Na raiz do projecto, execute:
+At the project root, run:
 
 ```powershell
 docker compose up -d
 ```
 
-### Verificar os containers
+### Check the containers
 
 ```powershell
 docker compose ps
 ```
 
-### Consultar os logs
+### View the logs
 
 ```powershell
 docker compose logs -f
 ```
 
-### Aceder ao Kafka UI
+### Access Kafka UI
 
-Abra no browser:
+Open in the browser:
 
 ```text
 http://localhost:8080
 ```
 
-### Parar os serviços
+### Stop the services
 
 ```powershell
 docker compose down
 ```
 
-Os dados persistentes são mantidos nos volumes Docker, salvo se forem removidos explicitamente.
+Persistent data is kept in Docker volumes unless explicitly removed.
 
-## 🎯 Resultados esperados
+## 🎯 Expected results
 
-No final do projecto, pretende-se ter uma solução funcional capaz de:
+By the end of the project, the goal is to have a functional solution capable of:
 
-- Simular vendas através de eventos gerados em Python.
-- Publicar eventos no Apache Kafka.
-- Distribuir eventos através de um topic com três partitions.
-- Consumir e processar evento em Python.
-- Validar os dados recebidos.
-- Armazenar as vendas no PostgreSQL.
-- Consultar e analisar os dados via SQL.
-- Monitorizar o fluxo de eventos no Kafka UI.
+- Simulating sales through events generated in Python.
+- Publishing events to Apache Kafka.
+- Distributing events across a topic with three partitions.
+- Consuming and processing events in Python.
+- Validating incoming data.
+- Storing sales in PostgreSQL.
+- Querying and analyzing data via SQL.
+- Monitoring the event flow through Kafka UI.
 
-## 🧠 Competências desenvolvidas
+## 🧠 Skills developed
 
-Este projecto permite consolidar competências práticas em:
+This project helps build practical skills in:
 
 - Data Engineering
 - Event-Driven Architecture
 - Real-Time Data Streaming
 - Apache Kafka
 - Python Programming
-- PostgreSQL e SQL
-- Docker e Docker Compose
+- PostgreSQL and SQL
+- Docker and Docker Compose
 - Data Validation
-- Git e GitHub
+- Git and GitHub
 - Data Pipeline Development
 
-## 🚀 Evolução futura
+## 🚀 Future evolution
 
-Numa fase posterior, pretende-se integrar Apache Airflow para explorar a orquestração de processos de dados, nomeadamente tarefas batch e a coordenação de pipelines.
+In a later phase, the project aims to integrate Apache Airflow to orchestrate data processes, including batch tasks and pipeline coordination.
 
-Outras melhorias possíveis incluem:
+Other possible improvements include:
 
-- Implementação de logging estruturado.
-- Tratamento de mensagens inválidas.
+- Structured logging implementation.
+- Handling invalid messages.
 - Dead Letter Queue (DLQ).
-- Monitorização de métricas.
-- Testes automatizados.
-- Dashboard de indicadores de vendas.
+- Metrics monitoring.
+- Automated testing.
+- Sales KPI dashboard.
 
 ---
 
-Projecto: Real-Time Sales Streaming Pipeline  
-Área: Data Engineering    
-Estado: Em desenvolvimento
+<div align="center">
 
-Desenvolvido como projecto prático de aprendizagem e demonstração de competências em Engenharia de Dados.
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Kafka](https://img.shields.io/badge/Apache%20Kafka-231F20?style=for-the-badge&logo=apachekafka&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+
+</div>
+
+Project: Real-Time Sales Streaming Pipeline  
+Area: Data Engineering  
+Type: Portfolio Project  
+Status: In development
+
+Developed as a practical learning project to demonstrate data engineering skills and real-world streaming concepts.

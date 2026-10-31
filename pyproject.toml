@@ -1,0 +1,19 @@
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kafka-sales-streaming"
+version = "0.1.0"
+description = "Real-time sales streaming with Apache Kafka and Python"
+requires-python = ">=3.11"
+dependencies = [
+    "confluent-kafka==2.16.1"
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

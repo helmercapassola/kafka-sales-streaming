@@ -1,0 +1,6 @@
+Metadata-Version: 2.4
+Name: kafka-sales-streaming
+Version: 0.1.0
+Summary: Real-time sales streaming with Apache Kafka and Python
+Requires-Python: >=3.11
+Requires-Dist: confluent-kafka==2.16.1
